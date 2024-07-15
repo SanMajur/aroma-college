@@ -9,6 +9,18 @@ import { MdSearch } from "react-icons/md";
 import Accordion from "./Accordion";
 
 export default function MobileNavbar() {
+  const subMenuSList = [
+    { name: "admission", menus: ["auth", "app", "time", "settings"] },
+    {
+      name: "academics",
+      menus: ["auth", "app", "time", "settings", "digging"],
+    },
+    {
+      name: "student life",
+      menus: ["auth", "app", "time", "settings", "digging"],
+    },
+    { name: "about", menus: ["auth", "app", "time", "settings", "digging"] },
+  ];
   const [isOpen, setIsOpen] = useState(false);
   return (
     <header className="bg-red-900 text-white fixed top-0 right-0 left-0">
@@ -56,19 +68,15 @@ export default function MobileNavbar() {
                 </button>
               </form>
             </div>
-            <ul className="block ">
-              <li>
-                <Accordion title="Admission" />
-              </li>
-              <li>
-                <Accordion title="Academics" />
-              </li>
-              <li>
-                <Accordion title="Student Life" />
-              </li>
-              <li>
-                <Accordion title="About" />
-              </li>
+            <ul className="block overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100">
+              {subMenuSList?.map((menu) => (
+                <div
+                  key={menu.name}
+                  className="overflow-hidden flex flex-col gap-1"
+                >
+                  <Accordion data={menu} />
+                </div>
+              ))}
             </ul>
           </div>
         </div>
