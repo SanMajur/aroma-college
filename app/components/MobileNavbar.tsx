@@ -7,21 +7,13 @@ import { GoSearch } from "react-icons/go";
 import { IoMdHome } from "react-icons/io";
 import { MdSearch } from "react-icons/md";
 import Accordion from "./Accordion";
+import { subMenusList } from "../data";
 
 export default function MobileNavbar() {
-  const subMenuSList = [
-    { name: "admission", menus: ["auth", "app", "time", "settings"] },
-    {
-      name: "academics",
-      menus: ["auth", "app", "time", "settings", "digging"],
-    },
-    {
-      name: "student life",
-      menus: ["auth", "app", "time", "settings", "digging"],
-    },
-    { name: "about", menus: ["auth", "app", "time", "settings", "digging"] },
-  ];
   const [isOpen, setIsOpen] = useState(false);
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <header className="bg-red-900 text-white fixed top-0 right-0 left-0">
       <nav className="md:container mx-auto flex justify-between items-center relative px-4 pb-2">
@@ -69,12 +61,12 @@ export default function MobileNavbar() {
               </form>
             </div>
             <ul className="block overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100">
-              {subMenuSList?.map((menu) => (
+              {subMenusList?.map((menu) => (
                 <div
                   key={menu.name}
                   className="overflow-hidden flex flex-col gap-1"
                 >
-                  <Accordion data={menu} />
+                  <Accordion data={menu} handleOpen={handleToggle} />
                 </div>
               ))}
             </ul>

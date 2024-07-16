@@ -2,7 +2,12 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-export default function Accordion({ data }: { data: any }) {
+interface AccordionProps {
+  data: any;
+  handleOpen: () => void;
+}
+
+const Accordion: React.FC<AccordionProps> = ({ data, handleOpen }) => {
   const [accordionOpen, setAccordionOpen] = useState(false);
   return (
     <div className="">
@@ -42,8 +47,12 @@ export default function Accordion({ data }: { data: any }) {
       >
         <ul className="overflow-hidden flex flex-col gap-1">
           {data.menus.map((menu: React.Key | null | undefined) => (
-            <li key={menu} className="px-8 py-2 block hover:bg-[#1e5288] ">
-              <Link className="capitalize block" href={`/${data.name}/${menu}`}>
+            <li
+              key={menu}
+              className="px-8 py-2 block hover:bg-[#1e5288] "
+              onClick={handleOpen}
+            >
+              <Link className="capitalize block" href={`/${menu}`}>
                 {menu}
               </Link>
             </li>
@@ -52,4 +61,5 @@ export default function Accordion({ data }: { data: any }) {
       </div>
     </div>
   );
-}
+};
+export default Accordion;
