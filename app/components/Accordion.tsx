@@ -9,6 +9,9 @@ interface AccordionProps {
 
 const Accordion: React.FC<AccordionProps> = ({ data, handleOpen }) => {
   const [accordionOpen, setAccordionOpen] = useState(false);
+  const handleAccordion = () => {
+    setAccordionOpen(!accordionOpen);
+  };
   return (
     <div className="">
       <button
@@ -50,7 +53,10 @@ const Accordion: React.FC<AccordionProps> = ({ data, handleOpen }) => {
             <li
               key={menu}
               className="px-8 py-2 block hover:bg-[#1e5288] "
-              onClick={handleOpen}
+              onClick={() => {
+                handleOpen();
+                handleAccordion();
+              }}
             >
               <Link className="capitalize block" href={`/${menu}`}>
                 {menu}
